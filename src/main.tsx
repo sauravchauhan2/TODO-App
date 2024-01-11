@@ -7,6 +7,8 @@ import BtnOption from './components/BtnOption'
 import Input from "./components/Input";
 import Button from "./components/Button";
 import ToggleOption from "./components/ToggleOption"
+import Descriptions from "./components/Descriptions"
+
 interface Iprop {
 
 }
@@ -18,6 +20,7 @@ class Main extends React.Component<Iprop, any>{
         super(props)
         this.state =
         {
+            description: undefined,
             editID: undefined,
             todoName: "",
             arr: [],
@@ -26,38 +29,37 @@ class Main extends React.Component<Iprop, any>{
             color: ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
             cntcheck: false,
             errorFlag: "hidden",
-            audio : new Audio('complete.mp3')
+            audio: new Audio('complete.mp3')
         };
 
     }
 
 
     //set styleflag 
-     
-    setStyle =(flag : any,index : any)=>{
+
+    setStyle = (flag: any, index: any) => {
 
         this.state.display[index].styleFlag = flag;
-        console.log(flag , index);
+        console.log(flag, index);
         this.setState(
             {
-                display : this.state.display
+                display: this.state.display
             }
         )
-        
+
         setTimeout(() => {
-            console.log("check: ", this.state.display);    
+            console.log("check: ", this.state.display);
         }, 100);
 
         const checkLocal = localStorage.getItem('todo');
-        if(checkLocal == null)
-        {
+        if (checkLocal == null) {
             window.location.reload();
             alert("sorry... database is deleted for some reasons.😞");
-           
+
         }
-        else{
-            localStorage.setItem('todo',JSON.stringify(this.state.display));
-        } 
+        else {
+            localStorage.setItem('todo', JSON.stringify(this.state.display));
+        }
     }
 
     componentDidMount = () => {
@@ -72,7 +74,7 @@ class Main extends React.Component<Iprop, any>{
             }
         )
         setTimeout(() => {
-                console.log('in main file ',this.state.cntcheck)
+            console.log('in main file ', this.state.cntcheck)
         }, 100);
     }
 
@@ -86,6 +88,8 @@ class Main extends React.Component<Iprop, any>{
                 editID: editID
             }
         )
+
+        console.log("savesomething : 0", editID);
     }
 
 
@@ -156,12 +160,12 @@ class Main extends React.Component<Iprop, any>{
                 console.log("thundeerrr", cnt);
                 return (
 
-                    <div style={{ boxSizing: "border-box" }} className={this.state.color[cnt - 1]}>
+                    <div style={{ boxSizing: "border-box",display: "flex",alignItems:"center",paddingLeft: "38%"}} className={this.state.color[cnt - 1]}>
                         {
-                            <CheckBox value={value} display={this.state.display} index={index} setDis={this.saveDisplay} playSound = {this.state.audio}/>
+                            <CheckBox value={value} display={this.state.display} index={index} setDis={this.saveDisplay} playSound={this.state.audio} />
                         }
                         {
-                            <MainList value={value} index={index}  setStyle={this.setStyle}/>
+                            <MainList value={value} index={index} setStyle={this.setStyle} />
                         }
 
 
@@ -175,6 +179,11 @@ class Main extends React.Component<Iprop, any>{
                                 }
                             } />
 
+
+                        }
+
+                        {
+                            <Descriptions />
                         }
                         <br></br>
                         <br></br>
@@ -221,16 +230,16 @@ class Main extends React.Component<Iprop, any>{
         return (
             <>
 
-                <div style={{ textAlign: 'center',marginTop: "20px" }}>
+                <div style={{ textAlign: 'center', marginTop: "20px" }}>
 
 
                     {/* this is the title */}
                     <Title />
-
-
+                    
                     {/* <input type="text" style={{ width: "23%", height: "22px", marginLeft: "50px" }} onChange={(e) => this.handleText(e)} value={this.state.todoName} /> */}
                     <Input setdata={this.setdata} getdata={this.state.todoName} />
 
+                   
                     <Button data={
                         {
                             todoName: this.state.todoName,
@@ -243,6 +252,8 @@ class Main extends React.Component<Iprop, any>{
                             setdata: this.setdata
                         }
                     } />
+
+
 
                     <ToggleOption cnt={this.state.cntcheck} setCnt={this.setCnt} showItem={this.showItem} />
 
