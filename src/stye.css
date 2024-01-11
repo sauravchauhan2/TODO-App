@@ -1,0 +1,49 @@
+.addstyle {
+   text-decoration: line-through;
+}
+
+
+.red:hover {
+
+   background-color: red;
+   color: white;
+   font-weight: 800;
+}
+
+.green:hover {
+   background-color: green;
+   color: white;
+   font-weight: 800;
+}
+
+.orange:hover {
+   
+   background-color: orange;
+   color: white;
+   font-weight: 800;
+}
+
+.yellow:hover {
+   
+   background-color: yellow;
+   color: white;
+   font-weight: 800;
+}
+.blue:hover {
+   
+   background-color: blue;
+   color: white;
+   font-weight: 800;
+}
+.indigo:hover {
+   
+   background-color: indigo;
+   color: white;
+   font-weight: 800;
+}
+.violet:hover {
+   
+   background-color: violet;
+   color: white;
+   font-weight: 800;
+}
