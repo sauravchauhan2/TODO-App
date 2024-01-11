@@ -1,9 +1,43 @@
 import { unescape } from "querystring";
 import React from "react";
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd, IoMdReturnLeft } from "react-icons/io";
 import { isReserved, getValidVarName } from 'reserved-tokens';
+import { escapeLeadingUnderscores } from "typescript";
 
 export default class Button extends React.Component<any>{
+
+
+
+
+
+    performChanges = (flag: any) => {
+
+        const CheckPro = new Promise((resolve, reject) => {
+
+            if (flag) {
+                resolve(flag);
+            }
+
+        })
+
+
+        const checkLocal = localStorage.getItem('todo');
+
+        if (checkLocal == null) {
+            window.location.reload();
+            alert("sorry... database is deleted for some reasons.😞");
+
+        }
+        else {
+            CheckPro.then((msg: any) => {
+                if (msg) {
+                    localStorage.setItem('todo', JSON.stringify(this.props.data.arr));
+                }
+            });
+
+        }
+
+    }
 
     addme = () => {
         console.log("check: ", isReserved(this.props.data.todoName.trim()));
@@ -41,7 +75,16 @@ export default class Button extends React.Component<any>{
                 console.log("hellooo already.....");
                 data = this.props.data.display.map((value: any, index: any) => {
                     if (Object.is(value.todoName, (takeTodo.trim()))) {
-                        return false;
+                        if (this.props.data.editID >= 0) {
+                            return {
+                                'todoName': value.todoName, 'styleFlag': value.styleFlag
+                            }
+                        }
+                        else {
+
+                            return false
+                        }
+
                     }
                     else {
                         return {
@@ -50,7 +93,10 @@ export default class Button extends React.Component<any>{
                     }
                 })
 
+
+
                 if (data.includes(false)) {
+
                     alert(`sorry "${takeTodo.trim()}" is already present.😀`)
                     this.setState(
                         {
@@ -58,6 +104,7 @@ export default class Button extends React.Component<any>{
                         }
                     )
                 }
+
                 else {
                     //perform Edit task....
                     if (this.props.data.editID >= 0) {
@@ -82,36 +129,16 @@ export default class Button extends React.Component<any>{
 
                     console.log("data is :", data);
 
+
+                }
+                
+                console.log("dev ::", data)
+                if (data.includes(false)) {
+
+                }
+                else {
                     const checkState = this.props.data.saveArr(data);
-                    const CheckPro = new Promise((resolve, reject) => {
-
-                        if (checkState) {
-                            resolve(checkState);
-                        }
-
-
-                    })
-
-
-
-                    const checkLocal = localStorage.getItem('todo');
-
-                    if (checkLocal == null) {
-                        window.location.reload();
-                        alert("sorry... database is deleted for some reasons.😞");
-
-                    }
-                    else {
-                        CheckPro.then((msg : any) => {
-                            if(msg)
-                            {
-                                localStorage.setItem('todo', JSON.stringify(this.props.data.arr));
-                            }
-                        });
-
-                    }
-
-
+                    this.performChanges(checkState);
                 }
 
             }
