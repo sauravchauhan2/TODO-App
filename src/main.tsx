@@ -4,7 +4,7 @@ import Title from './components/Title';
 import CheckBox from './components/CheckBox'
 import MainList from './components/MainList'
 import BtnOption from './components/BtnOption'
-import Input from "./components/Input";
+import InputForm from "./components/InputForm";
 import Button from "./components/Button";
 import ToggleOption from "./components/ToggleOption"
 import Descriptions from "./components/Descriptions"
@@ -237,7 +237,7 @@ class Main extends React.Component<Iprop, any>{
                     <Title />
                     
                     {/* <input type="text" style={{ width: "23%", height: "22px", marginLeft: "50px" }} onChange={(e) => this.handleText(e)} value={this.state.todoName} /> */}
-                    <Input setdata={this.setdata} getdata={this.state.todoName} />
+                    <InputForm setdata={this.setdata} getdata={this.state.todoName} />
 
                    
                     <Button data={

@@ -1,4 +1,6 @@
 import React from "react";
+import InputForm from "./InputForm";
+
 
 
 
@@ -31,9 +33,9 @@ export default class CheckBox extends React.Component<any>{
     render() {
         return (
 
-            (this.props.value.styleFlag) ? <input type="checkbox" style={{ fontSize: "50px",marginRight : "5px" }} onClick={(e) => {
+            (this.props.value.styleFlag) ? <InputForm type="checkbox" style={{ fontSize: "50px",marginRight : "5px" }} onClick={(e: any) => {
                 this.saveCheck(e, this.props.index)
-            }} checked={this.props.value.styleFlag} /> : <input type="checkbox" style={{ fontSize: "50px",marginRight: "5px"}} onClick={(e) => {
+            }} checked={this.props.value.styleFlag} /> : <InputForm type="checkbox" style={{ fontSize: "50px",marginRight: "5px"}} onClick={(e: any) => {
                 this.saveCheck(e, this.props.index)
             }} checked={this.props.value.styleFlag} />
 

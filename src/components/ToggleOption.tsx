@@ -1,5 +1,7 @@
 import React from "react";
 import './style.css'
+import InputForm from "./InputForm";
+
 
 export default class ToggleOption extends React.Component <any>{
 
@@ -26,7 +28,7 @@ export default class ToggleOption extends React.Component <any>{
                 </div>
                 <div>
                 <label className ="switch">
-                <input type ="checkbox" onClick={(e)=>{
+                <InputForm type ="checkbox" onClick={(e: any)=>{
                      this.showChange(e);
                 }} />
                 <span className ="slider round"/>
